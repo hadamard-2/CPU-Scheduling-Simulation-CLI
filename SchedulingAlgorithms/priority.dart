@@ -6,8 +6,8 @@ import '../process.dart';
 import '../time_interval.dart';
 import 'scheduler.dart';
 
-// Non-preemptive Shortest Job First Scheduling
-class NPSJF extends Scheduler {
+// Non-preemptive Priority Scheduling
+class NPPriority extends Scheduler {
   // completion time of the previous process
   int completionTime = 0;
   // service time of the current process
@@ -15,7 +15,8 @@ class NPSJF extends Scheduler {
 
   @override
   void scheduleJobs() {
-    // of the processes that have arrived, choose the shortest one and add to the ready queue
+    // of the processes that have arrived, choose the job with the highest priority
+    // (least priority number) and add to the ready queue
 
     // first time I need to check what processes have arrived:
     // the least arrival time
@@ -28,8 +29,9 @@ class NPSJF extends Scheduler {
           .toList();
       if (arrivedProcesses.isNotEmpty) {
         // admitting an arrived process that takes the least time to execute
+        // NOTE: this is the only part that differs from NPSJF
         var arrivedProcess = arrivedProcesses
-            .reduce((a, b) => a.burstTime <= b.burstTime ? a : b);
+            .reduce((a, b) => a.priority! <= b.priority! ? a : b);
         admit(arrivedProcess);
 
         // NOTE: I'm removing processes from newProcesses one at a time
@@ -72,25 +74,5 @@ class NPSJF extends Scheduler {
     }
 
     return ganttChart;
-  }
-}
-
-// Preemptive Shortest Job First Scheduling
-class PSJF extends Scheduler {
-  @override
-  void scheduleJobs() {
-    // TODO: implement scheduleJobs
-  }
-
-  @override
-  Bar run(Process process) {
-    // TODO: implement run
-    throw UnimplementedError();
-  }
-
-  @override
-  GanttChart scheduleCPU() {
-    // TODO: implement scheduleCPU
-    throw UnimplementedError();
   }
 }

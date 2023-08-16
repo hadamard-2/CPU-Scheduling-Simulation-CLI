@@ -5,7 +5,7 @@ class Process {
   String? name;
   int arrivalTime;
   int burstTime;
-  int? priorityNum;
+  int? priority;
 
   // to be read from gantt chart
   int? serviceTime;
@@ -20,7 +20,7 @@ class Process {
       {String? name,
       this.arrivalTime = 0,
       required this.burstTime,
-      this.priorityNum}) {
+      this.priority}) {
     this.name = name ?? 'p${_num++}';
   }
 

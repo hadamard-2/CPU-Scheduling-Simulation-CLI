@@ -14,10 +14,10 @@ class Report {
   }
 
   void drawTable() {
-    print('\tAT\tBT\tWT\tTRT\tRT');
+    print('\tAT\tBT\tWT\tCT\tTRT\tRT');
     for (Process process in processes) {
       print(
-          '${process.name}\t${process.arrivalTime}\t${process.burstTime}\t${process.waitingTime}\t${process.turnAroundTime}\t${process.responseTime}');
+          '${process.name}\t${process.arrivalTime}\t${process.burstTime}\t${process.waitingTime}\t${process.completionTime}\t${process.turnAroundTime}\t${process.responseTime}');
     }
   }
 }

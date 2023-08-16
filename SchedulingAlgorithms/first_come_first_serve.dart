@@ -8,17 +8,18 @@ import 'scheduler.dart';
 
 // First Come First Serve Scheduling
 class FCFS extends Scheduler {
-// service time & completion time for each process
+  // service time of the current process
   int serviceTime = 0;
+  // completion time of the previous process
   int completionTime = 0;
 
   // selects which processes should be brought into the ready queue
   void scheduleJobs() {
     while (newProcesses.length != 0) {
-      var readyProcess = newProcesses.reduce((current, next) =>
-          current.arrivalTime < next.arrivalTime ? current : next);
-      admit(readyProcess);
-      newProcesses.remove(readyProcess);
+      var arrivedProcess = newProcesses.reduce((current, next) =>
+          current.arrivalTime <= next.arrivalTime ? current : next);
+      admit(arrivedProcess);
+      newProcesses.remove(arrivedProcess);
     }
   }
 
@@ -30,7 +31,6 @@ class FCFS extends Scheduler {
     while (readyQueue.isNotEmpty) {
       Process processToBeRun = readyQueue.removeFirst();
 
-      // how I dealt with idle time
       serviceTime = max(completionTime, processToBeRun.arrivalTime);
 
       Bar processBar = run(processToBeRun);
