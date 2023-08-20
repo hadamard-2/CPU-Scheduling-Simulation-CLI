@@ -1,4 +1,4 @@
-import 'process.dart';
+import '../process.dart';
 import 'time_interval.dart';
 
 class Bar {

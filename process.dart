@@ -1,11 +1,15 @@
-import 'gantt_chart.dart';
+import 'gantt_chart/gantt_chart.dart';
 
 class Process {
   static int _num = 0;
   String? name;
   int arrivalTime;
   int burstTime;
+  // only used for priority scheduling
   int? priority;
+  // only used for preemptive scheduling
+  // I only initialized it because I was forced to by Dart's null safety
+  int remainingTime = 0;
 
   // to be read from gantt chart
   int? serviceTime;
@@ -22,6 +26,7 @@ class Process {
       required this.burstTime,
       this.priority}) {
     this.name = name ?? 'p${_num++}';
+    this.remainingTime = burstTime;
   }
 
   void readGanttChart(GanttChart ganttChart) {

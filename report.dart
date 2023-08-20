@@ -1,4 +1,4 @@
-import 'gantt_chart.dart';
+import 'gantt_chart/gantt_chart.dart';
 import 'process.dart';
 
 class Report {

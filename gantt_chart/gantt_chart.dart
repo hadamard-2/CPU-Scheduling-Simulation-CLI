@@ -1,5 +1,5 @@
 import 'bar.dart';
-import 'process.dart';
+import '../process.dart';
 
 class GanttChart {
   List<Bar> _processBars = new List<Bar>.empty(growable: true);
