@@ -13,10 +13,11 @@ class NPSJF extends NonPreemptiveScheduler {
         newProcesses.reduce((a, b) => a.arrivalTime <= b.arrivalTime ? a : b);
     completionTime = earliestProcess.arrivalTime;
 
-    while (newProcesses.length != 0) {
+    while (newProcesses.isNotEmpty) {
       var arrivedProcesses = newProcesses
           .where((process) => process.arrivalTime <= completionTime)
           .toList();
+
       if (arrivedProcesses.isNotEmpty) {
         // admitting an arrived process that takes the least time to execute
         var arrivedProcessWithLeastBT = arrivedProcesses

@@ -74,6 +74,8 @@ class PSJF extends PreemptiveScheduler {
         var arrivedProcesses = getArrivedProcesses(time);
         // admit processes that have arrived to ready queue
         admitProcesses(arrivedProcesses);
+
+        // print();
       }
 
       // schedule CPU
@@ -117,7 +119,12 @@ class PSJF extends PreemptiveScheduler {
         else {
           // run the process for 1 sec
           runningProcess!.remainingTime--;
-          completionTime = time;
+          if (runningProcess!.remainingTime == 0) {
+            completionTime = time;
+            ganttChart.addProcessBar(Bar(
+                TimeInterval(serviceTime, completionTime), runningProcess!));
+            runningProcess = null;
+          }
           // interrupt the running process
           Bar processBar = interruptRunningProcess();
 

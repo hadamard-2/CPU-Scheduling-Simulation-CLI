@@ -4,9 +4,9 @@ import 'non_preemptive_scheduler.dart';
 class FCFS extends NonPreemptiveScheduler {
   // selects which processes should be brought into the ready queue
   void scheduleJobs() {
-    while (newProcesses.length != 0) {
-      var arrivedProcess = newProcesses.reduce((current, next) =>
-          current.arrivalTime <= next.arrivalTime ? current : next);
+    while (newProcesses.isNotEmpty) {
+      var arrivedProcess =
+          newProcesses.reduce((a, b) => a.arrivalTime <= b.arrivalTime ? a : b);
       admitProcesses([arrivedProcess]);
     }
   }

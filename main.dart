@@ -8,16 +8,17 @@ import 'report.dart';
 
 void main() {
   List<Process> processes = [
-    Process(name: 'p1', arrivalTime: 0, burstTime: 0, priority: 7),
-    Process(name: 'p2', arrivalTime: 0, burstTime: 2, priority: 4),
+    Process(name: 'p1', arrivalTime: 0, burstTime: 0, priority: 1),
+    Process(name: 'p2', arrivalTime: 0, burstTime: 2, priority: 2),
     Process(name: 'p3', arrivalTime: 0, burstTime: 4, priority: 1),
-    Process(name: 'p4', arrivalTime: 0, burstTime: 5, priority: 4)
+    Process(name: 'p4', arrivalTime: 0, burstTime: 5, priority: 3)
   ];
 
-  var scheduler1 = PSJF();
+  var scheduler1 = FCFS();
 
   scheduler1.newProcesses.addAll(processes);
-  GanttChart ganttChart = scheduler1.scheduleJobsAndCPU();
+  scheduler1.scheduleJobs();
+  GanttChart ganttChart = scheduler1.scheduleCPU();
 
   print(ganttChart);
   Report schedulingReport = Report(processes, ganttChart);
